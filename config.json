@@ -1,0 +1,5 @@
+{
+    "user": "",
+    "pass": "",
+    "dns": "sqlite:db/nfc_films_v2.sqlite"
+}

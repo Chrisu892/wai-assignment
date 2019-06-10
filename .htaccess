@@ -1,0 +1,17 @@
+# Configuration file for URL rewriting
+# Author: Chris
+# Created at: 18/01/2019
+
+# Turn on the rewriting engine
+RewriteEngine On
+
+# Redirect all requests to the index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
+
+# Otherwise, redirect all requests to the index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Create vanity URLs
+RewriteRule ^(.*)$ /server/index.php?$1 [L,QSA]

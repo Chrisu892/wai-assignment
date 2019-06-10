@@ -1,0 +1,14 @@
+<div>
+    <ul class="reset-list nav__list">
+        <li class="nav__list-item">
+            <a href="index" title="Go to homepage" class="nav__list-link"><span>Home</span></a>
+        </li>
+        <li class="nav__list-item">
+            <a href="testing.php" target="_blank" class="nav__list-link"><span>Testing</span></a>
+        </li>
+        <li class="nav__list-item" data-ng-if="!data.user" data-ng-click="toggleForm()">Login</li>
+        <li class="nav__list-item" data-ng-if="data.user">Hello, {{ data.user.username }}</li>
+        <li class="nav__list-item" data-ng-if="data.user" data-ng-click="logout()">Logout</li>
+    </ul>
+    <div data-ng-include="'js/includes/login.html'"></div>
+</div>

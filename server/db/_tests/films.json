@@ -1,0 +1,33 @@
+{
+    "filmsCount": 2,
+    "films": [
+        {
+            "id": 1,
+            "title": "The Day After Tomorrow",
+            "description": "Awesome film, you'll love it!",
+            "release_year": "2001",
+            "language_id": 1,
+            "original_language_id": 1,
+            "rental_duration": 1.5,
+            "length": 90,
+            "replacement_cost": 12.50,
+            "rating": 5,
+            "special_features": ["wow","nice","catastrofic"],
+            "last_update": 1231334443
+        },
+        {
+            "id": 2,
+            "title": "Avengers: Inifity War",
+            "description": "Awesome film, you'll love it!",
+            "release_year": "2018",
+            "language_id": 1,
+            "original_language_id": 1,
+            "rental_duration": 2.5,
+            "length": 180,
+            "replacement_cost": 13.50,
+            "rating": 5,
+            "special_features": ["wow","awesome","comics"],
+            "last_update": 12313323233
+        }
+    ]
+}

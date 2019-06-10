@@ -1,0 +1,13 @@
+<form data-ng-submit="login()" data-ng-show="data.showForm" class="login-form" novalidate>
+    <div class="login-form__wrap">
+        <p class="login-form__ui">
+            <label for="email" data-ng-show="0">Email</label>
+            <input class="login-form__ui-input" id="email" type="email" placeholder="Email address..." data-ng-model="data.email" />
+            <label for="password" data-ng-show="0">Password</label>
+            <input class="login-form__ui-input" id="password" type="password" placeholder="Password..." data-ng-model="data.password" />
+            <button class="login-form__ui-btn" type="submit"><span>Login</span></button>
+            <button class="login-form__ui-btn" type="button" data-ng-click="toggleForm()"><span>Cancel</span></button>
+        </p>
+        <div class="error" data-ng-if="data.error">{{ data.error }}</div>
+    </div>
+</form> 

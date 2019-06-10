@@ -1,0 +1,55 @@
+<section class="section" id="hero">
+    <div data-ng-class="data.class" class="main__image"></div>
+    <div class="hero">
+        <div class="inner">
+            <div class="hero__wrap">
+                <h1 class="hero__title">Find your favourite films</h1>
+                <div class="hero__inputs">
+                    <label for="search" data-ng-show="0">Search term</label>
+                    <input data-ng-keyup="searchFilms($event.target.value)"  class="hero__search" type="search" id="search" autocomplete="new-password" placeholder="Search for title or category..."/>
+                    <label for="select" data-ng-show="0">Select category</label>
+                    <select data-ng-model="data.selectedCategory" class="hero__select" id="select" data-ng-mouseover="loadCategories()">
+                        <option value="">All categories</option>
+                        <option data-ng-repeat="category in data.loadedCategories" value="{{ category.id }}">{{ category.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+<section class="section">
+    <div class="inner">
+        <h2 class="section__title">Showing {{ data.count }} films</h2>
+        <div data-ng-if="data.loading">Loading...</div>
+        <div data-ng-if="data.films.length" class="results results--show">
+            <ul class="reset--list films">
+                <li data-ng-repeat="film in data.films" class="films__item">
+                    <article class="films__item-wrap">
+                        <h2 class="films__item-title">{{ film.title }}</h2>
+                        <p class="films__item-text">{{ film.short_description }}...</p>
+                        <div class="films__details">
+                            <div class="films__details-item">{{ film.release_year }}</div>
+                            <div class="films__details-item">{{ film.rating }}</div>
+                            <div class="films__details-item">{{ film.category }}</div>
+                        </div>
+                        <p class="films__item-text--small">Updated: {{ film.last_update }}</p>
+                        <a class="btn btn--solid" data-ng-href="film/{{ film.film_id }}" data-ng-animate-ref="{{ film.film_id }}" title="Show {{ film.title }}"><span>Show details</span></a>
+                    </article>
+                </li>
+            </ul>
+            <div class="results results__more">
+                <button data-ng-click="loadMore()" class="btn btn--long" type="button">
+                    <span data-ng-if="data.loadMore">Load more</span>
+                    <span data-ng-if="!data.loadMore">No more results</span>
+                </button>
+            </div>
+        </div>
+        <div data-ng-if="data.films.length === 0" class="results results--hide">
+            <div>
+                <h2 class="results__title">Oops, your search found no results</h2>
+                <p class="results__text">Please try different term or change film category.</p>
+            </div>
+        </div>
+    </div>
+</section>

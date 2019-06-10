@@ -1,0 +1,79 @@
+<section class="film-preview">
+    <div class="film-preview__wrap" data-ng-class="{'sider-active': data.film !== null}" data-ng-animate-ref="{{ data.film.film_id }}">
+        <div class="film-preview__image" class="main__image--cinema" data-ng-class="data.class"></div>
+        <article class="film-preview__details">
+            <button type="button" class="btn-close" data-ng-click="close()">
+                <span class="btn-close__line"></span>
+                <span class="btn-close__line"></span>
+            </button>
+            <h2>{{ data.film.title }}</h2>
+            <p>{{ data.film.description }}</p>
+            <div class="film-tags">
+                <div class="film-tags__item">{{ data.film.release_year }}</div>
+                <div class="film-tags__item">{{ data.film.rating }}</div>
+                <div class="film-tags__item">{{ data.film.category }}</div>
+                <div class="film-tags__item">{{ data.film.language }} <span data-ng-if="data.film.original_language">({{ data.film.original_language }})</span></div>
+                <div class="film-tags__item">{{ data.film.length }} min</div>
+            </div>
+            <p class="small-print">Updated on {{ data.film.last_update }}</p>
+        </article>
+        <div class="film-preview__details">
+            <div class="tab__buttons">
+                <button class="tab__button" data-ng-class="{ 'tab__button--active': data.activeTab === 'info' }" data-ng-click="toggleTab('info')">About Film</button>
+                <button class="tab__button" data-ng-class="{ 'tab__button--active': data.activeTab === 'notes' }" data-ng-click="toggleTab('notes')">Notes</button>
+            </div>
+            <div data-ng-if="data.activeTab === 'info'" class="tab__content">
+                <article>
+                    <h3>Rental information</h3>
+                    <p>Rental duration: {{ data.film.rental_duration }} day{{ data.film.rental_duration !== 1 ? "s" : "" }}</p>
+                    <p>Rate: &pound;{{ data.film.rental_rate }}</p>
+                    <p>Replacement const: &pound;{{ data.film.replacement_cost }}</p>
+                </article>
+                <article data-ng-if="data.film.special_features">
+                    <h3>Special features</h3>
+                    <p>{{ data.film.special_features.split(',').join(', ') }}</p>
+                </article>
+                <article>
+                    <h3>Film cast</h3>
+                    <ul data-ng-if="data.actors.length"><li data-ng-repeat="actor in data.actors">{{ actor.first_name }} {{ actor.last_name }}</li></ul>
+                    <p data-ng-if="data.actors.length === 0">This film has no actors.</p>
+                </article>
+            </div>
+            <div data-ng-if="data.activeTab === 'notes'">
+                <article data-ng-controller="NotesController" class="tab__content">
+                    <h3>Notes ({{ data.count }})</h3>
+                    <ul data-ng-if="data.count > 0 && data.user.email">
+                        <li data-ng-repeat="note in data.notes" class="note" data-ng-class="{'note--author': note.isAuthor}">
+                            <form data-ng-submit="updateNote($index)">
+                                <div data-ng-if="!data.showForm">
+                                    <p data-ng-bind-html="note.comment" class="note__content"></p>
+                                    <p class="small-print">Added by <strong>{{ note.author }}</strong> on {{ note.lastupdated }}</p>
+                                </div>
+                                <div data-ng-if="data.showForm && note.isAuthor">
+                                    <textarea data-ng-model="data.editedComment"></textarea>
+                                    <div class="error" data-ng-if="data.editedCommentError">{{ data.error }}</div>
+                                </div>
+                                <div data-ng-if="note.isAuthor">
+                                    <button type="submit" data-ng-if="data.showForm" class="login-form__ui-btn"><span>Update</span></button>
+                                    <button type="button" data-ng-if="data.showForm" data-ng-click="toggleForm($index)" class="login-form__ui-btn"><span>Cancel</span></button>
+                                    <button type="button" data-ng-if="!data.showForm" data-ng-click="toggleForm($index)" class="login-form__ui-btn"><span>Edit</span></button>
+                                    <button type="button" data-ng-click="deleteNote($index)" class="login-form__ui-btn"><span>Delete</span></button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                    <p data-ng-if="data.count === 0 && data.user.email" class="note__nope">This film has no notes.</p>
+                    <div data-ng-show="data.user.email && !data.userAddedNote" class="note__create">
+                        <h3>Add note</h3>
+                        <form data-ng-submit="addNote()">
+                            <textarea data-ng-model="data.comment"></textarea>
+                            <div class="error" data-ng-show="data.error">{{ data.error }}</div>
+                            <button type="submit" class="login-form__ui-btn"><span>Add note</span></button>
+                        </form>
+                    </div>
+                    <p data-ng-show="!data.user.email">Only logged in users can add and see notes.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>

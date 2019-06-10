@@ -1,0 +1,40 @@
+@mixin background($type) {
+    background: { size: $type; position: center; repeat: no-repeat; }
+}
+
+@mixin position($pos: absolute, $top: 0, $left: 0, $width: auto, $height: auto) {
+    position: $pos; top: $top; left: $left; width: $width; height: $height;
+}
+
+@mixin flex-center-all {
+    display: flex; align-items: center; justify-content: center;
+}
+
+@mixin flex-to-right {
+    display: flex; align-items: center; justify-content: flex-end;
+}
+
+@mixin uppercase-font($face) {
+    font-family: $face; font-size: 1.125em; text-transform: uppercase; letter-spacing: 1px;
+}
+
+@mixin radial-gradient($clr: $clr-dark) {
+    background: $clr;
+    background: radial-gradient(circle, rgba($clr,0) 0%, rgba($clr,1) 100%);
+}
+
+@mixin linear-gradient($clr: $clr-dark) {
+    background: transparent;
+    background: linear-gradient(180deg, rgba($clr,0) 40%, rgba($clr,1) 100%);
+}
+@mixin linear-gradient-light-to-dark($clr:$clr-dark, $deg: 180deg) {
+    background: $clr;
+    background: linear-gradient($deg, rgba($clr,1) 0%, rgba(darken($clr,10%),1) 100%);
+}
+
+@mixin border ($where) {
+    @if $where {
+        border-#{$where}: solid 1px transparentize($clr-white,0.9); }
+    @else {
+        border: solid 1px transparentize($clr-white,0.9); }
+}

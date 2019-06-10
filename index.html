@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-ng-app="app" data-ng-cloak>
+    <head data-ng-controller="IndexController">
+        <base href="/wai-assignment/" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <style>[ng\:cloak],[ng-cloak],.ng-cloak{display:none;}</style>
+        <title>{{ data.site_name }} : {{ data.meta_title }}</title>
+        <meta name="description" content="{{ data.meta_description }}" />
+        <meta name="author" content="{{ data.author }}" />
+        <link rel="stylesheet" href="resources/styles/app.min.css" />
+        <link rel="shortcut icon" href="resources/images/favicon.ico" />
+    </head>
+    <body>
+        <div id="app">
+            <header class="header" id="header" data-ng-controller="IndexController">
+                <div class="inner">
+                    <a class="logo" href="index">{{ data.site_name }}</a>
+                    <nav class="nav" data-ng-controller="AuthController" data-ng-include="'js/includes/nav.html'"></nav>
+                </div>
+            </header>
+
+            <main class="main">
+                <div data-ng-controller="FilmsController" data-ng-include="'js/includes/film-list.html'"></div>
+                <div data-ng-view class="view-animate"></div>
+            </main>
+            
+            <footer class="footer" data-ng-controller="IndexController">
+                <div class="inner">
+                    <p class="footer__credit small-print">&copy; 2019 {{ data.site_name }} - Read our <a href="terms">terms &amp; conditions</a>, <a href="privacy">privacy</a> and <a href="credits">credits</a>. Website by {{ data.author }}</p>
+                </div>
+            </footer>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-resource.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-cookies.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate.js"></script>
+        <script src="/wai-assignment/js/app.js"></script>
+        <script src="/wai-assignment/js/services.js"></script>
+    </body>
+</html>
